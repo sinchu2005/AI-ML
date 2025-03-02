@@ -1,0 +1,247 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "03cb88e8-9615-48cb-bbe9-5930ef51c1a7",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Capacity of jug 1:  4\n",
+      "Capacity of jug 2:  3\n",
+      "Amount of water to be measured:  2\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "================================RULES=================\n",
+      "Rule 1: Fill jug 1\n",
+      "Rule 2: Fill jug 2\n",
+      "Rule 3: Transfer all water from jug 1 to jug 2\n",
+      "Rule 4: Transfer all water from jug 2 to jug 1\n",
+      "Rule 5: Transfer some water from jug 1 to jug 2 until jug 2 is full\n",
+      "Rule 6: Transfer some water from jug 2 to jug 1 until jug 1 is full\n",
+      "Rule 7: Empty jug 1\n",
+      "Rule 8: Empty jug 2\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Enter rule to apply:  2\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "================================STATUS=================\n",
+      "CURRENT STATE: 0 3\n",
+      "================================RULES=================\n",
+      "Rule 1: Fill jug 1\n",
+      "Rule 2: Fill jug 2\n",
+      "Rule 3: Transfer all water from jug 1 to jug 2\n",
+      "Rule 4: Transfer all water from jug 2 to jug 1\n",
+      "Rule 5: Transfer some water from jug 1 to jug 2 until jug 2 is full\n",
+      "Rule 6: Transfer some water from jug 2 to jug 1 until jug 1 is full\n",
+      "Rule 7: Empty jug 1\n",
+      "Rule 8: Empty jug 2\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Enter rule to apply:  4\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "================================STATUS=================\n",
+      "CURRENT STATE: 3 0\n",
+      "================================RULES=================\n",
+      "Rule 1: Fill jug 1\n",
+      "Rule 2: Fill jug 2\n",
+      "Rule 3: Transfer all water from jug 1 to jug 2\n",
+      "Rule 4: Transfer all water from jug 2 to jug 1\n",
+      "Rule 5: Transfer some water from jug 1 to jug 2 until jug 2 is full\n",
+      "Rule 6: Transfer some water from jug 2 to jug 1 until jug 1 is full\n",
+      "Rule 7: Empty jug 1\n",
+      "Rule 8: Empty jug 2\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Enter rule to apply:  2\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "================================STATUS=================\n",
+      "CURRENT STATE: 3 3\n",
+      "================================RULES=================\n",
+      "Rule 1: Fill jug 1\n",
+      "Rule 2: Fill jug 2\n",
+      "Rule 3: Transfer all water from jug 1 to jug 2\n",
+      "Rule 4: Transfer all water from jug 2 to jug 1\n",
+      "Rule 5: Transfer some water from jug 1 to jug 2 until jug 2 is full\n",
+      "Rule 6: Transfer some water from jug 2 to jug 1 until jug 1 is full\n",
+      "Rule 7: Empty jug 1\n",
+      "Rule 8: Empty jug 2\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Enter rule to apply:  6\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "================================STATUS=================\n",
+      "CURRENT STATE: 2 4\n",
+      "GOAL ACHIEVED!\n"
+     ]
+    }
+   ],
+   "source": [
+    "j1 = int(input(\"Capacity of jug 1: \")) \n",
+    "j2 = int (input(\"Capacity of jug 2: \")) \n",
+    "g = int (input(\"Amount of water to be measured: \")) \n",
+    "def apply_rule(ch, x, y): \n",
+    "     \n",
+    "    if ch == 1: \n",
+    "      \n",
+    "      if x<j1: \n",
+    "        return j1,y \n",
+    "      else: \n",
+    "          print(\"Rule cannot be applied\") \n",
+    "          return x,y \n",
+    " \n",
+    "    elif ch == 2: \n",
+    "  \n",
+    "      if y<j2: \n",
+    "        return x ,j2 \n",
+    "      else: \n",
+    "        print(\"Rule cannot be applier\") \n",
+    "        return x,y \n",
+    "    \n",
+    "    if ch == 3: \n",
+    "        \n",
+    "      if x > 0 and x+y <= j2: \n",
+    "        return 0,x+y \n",
+    "      else: \n",
+    "        print(\"Rule cannot be applier\") \n",
+    "        return x,y \n",
+    " \n",
+    "    if ch == 4: \n",
+    "        \n",
+    "      if y > 0 and x+y <= j1: \n",
+    "        return x+y,0 \n",
+    "      else: \n",
+    "        print(\"Rule cannot be applier\") \n",
+    "        return x,y \n",
+    "     \n",
+    "    if ch == 5: \n",
+    "        \n",
+    "      if x > 0 and x+y >= j2: \n",
+    "        return x-(j2-y), j2 \n",
+    "      else: \n",
+    "        print(\"Rule cannot be applier\") \n",
+    "        return x,y \n",
+    "     \n",
+    "    if ch == 6: \n",
+    "      \n",
+    "      if y > 0 and x+y >= j1: \n",
+    "        return x-(j1-x), j1 \n",
+    "      else: \n",
+    "        print(\"Rule cannot be applier\") \n",
+    "        return x,y \n",
+    "     \n",
+    "    if ch == 7: \n",
+    "       \n",
+    "      if x > 0: \n",
+    "        return 0,y \n",
+    "      else: \n",
+    "        print(\"Rule cannot be applier\") \n",
+    "        return x,y \n",
+    "      \n",
+    "    if ch == 8: \n",
+    "       \n",
+    "      if y > 0: \n",
+    "        return x,0 \n",
+    "      else: \n",
+    "        print(\"Rule cannot be applier\") \n",
+    "        return x,y \n",
+    "      \n",
+    "    else: \n",
+    "      print(\"INVALID CHOICE\")  \n",
+    " \n",
+    "x = y = 0 \n",
+    "while(True): \n",
+    "  if (x==g) or (y==g): \n",
+    "    print('GOAL ACHIEVED!') \n",
+    "    break \n",
+    "  else: \n",
+    "    print(\"================================RULES=================\") \n",
+    "    print(\"Rule 1: Fill jug 1\") \n",
+    "    print(\"Rule 2: Fill jug 2\") \n",
+    "    print(\"Rule 3: Transfer all water from jug 1 to jug 2\") \n",
+    "    print(\"Rule 4: Transfer all water from jug 2 to jug 1\") \n",
+    "    print(\"Rule 5: Transfer some water from jug 1 to jug 2 until jug 2 is full\") \n",
+    "    print(\"Rule 6: Transfer some water from jug 2 to jug 1 until jug 1 is full\") \n",
+    "    print(\"Rule 7: Empty jug 1\") \n",
+    "    print(\"Rule 8: Empty jug 2\") \n",
+    "    ch = int(input(\"Enter rule to apply: \")) \n",
+    "    x, y = apply_rule(ch, x, y) \n",
+    "    print(\"================================STATUS=================\") \n",
+    "    print(\"CURRENT STATE:\", end = \" \") \n",
+    "    print(x, y) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "43117529-408e-4e80-a7a8-392b8ecd7dd0",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:base] *",
+   "language": "python",
+   "name": "conda-base-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
